@@ -247,7 +247,10 @@ async function fetchItem(link, category) {
       itemData[DB_PROPERTIES.IMDB_LINK] = 'https://www.imdb.com/title/' + imdbInfo[0].nextSibling.textContent.trim();
     }
     const release_date = dom.window.document.querySelector('#info [property="v:initialReleaseDate"]').textContent.split('(')[0];
+    console.log('release_date' + release_date);
     itemData[DB_PROPERTIES.MOVIE_RELEASE_DATE] = dayjs(release_date).format('YYYY-MM-DD');
+    console.log('itemData[DB_PROPERTIES.MOVIE_RELEASE_DATE]' + itemData[DB_PROPERTIES.MOVIE_RELEASE_DATE]);
+
   // music item page
   } else if (category === CATEGORY.music) {
     itemData[DB_PROPERTIES.TITLE] = dom.window.document.querySelector('#wrapper h1 span').textContent.trim();
@@ -438,7 +441,19 @@ async function addToNotion(itemData, category) {
         external: {
           url: properties[DB_PROPERTIES.POSTER]?.files[0]?.external?.url, // cannot be empty string or null
         },
-      }
+      };
+      postData.children = [
+        {
+          object: 'block',
+          type: 'image',
+          image: {
+            type: 'external',
+            external: {
+              url: properties[DB_PROPERTIES.POSTER]?.files[0]?.external?.url, // cannot be empty string or null
+            },
+          }
+        }
+      ];
     }
     const response = await notion.pages.create(postData);
     if (response && response.id) {
