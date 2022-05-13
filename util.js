@@ -6,6 +6,7 @@ const DB_PROPERTIES = {
   RATING_DATE: '打分日期', // common
   COMMENTS: '我的短评', // common
   YEAR: '上映年份',
+  MOVIE_RELEASE_DATE: '上映日期',
   DIRECTORS: '导演',
   ACTORS: '主演',
   GENRE: '类型', // movie, game, drama
@@ -28,6 +29,7 @@ const PropertyType = {
   RATING_DATE: 'date',
   COMMENTS: 'rich_text',
   YEAR: 'number',
+  MOVIE_RELEASE_DATE: 'date',
   DIRECTORS: 'rich_text',
   ACTORS: 'rich_text',
   GENRE: 'multi_select',
