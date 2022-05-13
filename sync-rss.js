@@ -246,6 +246,11 @@ async function fetchItem(link, category) {
     if (imdbInfo.length) {
       itemData[DB_PROPERTIES.IMDB_LINK] = 'https://www.imdb.com/title/' + imdbInfo[0].nextSibling.textContent.trim();
     }
+    const release_dates = dom.window.document.querySelectorAll('#info [property="v:initialReleaseDate"]').map(s => s.textContent.split('(')[0]);
+    console.log('release_dates' + release_dates);
+    release_dates.sort()
+    itemData[DB_PROPERTIES.MOVIE_RELEASE_DATE] = dayjs(release_date[0]).format('YYYY-MM-DD');
+    console.log('itemData[DB_PROPERTIES.MOVIE_RELEASE_DATE]' + itemData[DB_PROPERTIES.MOVIE_RELEASE_DATE]);
 
   // music item page
   } else if (category === CATEGORY.music) {
