@@ -247,9 +247,7 @@ async function fetchItem(link, category) {
       itemData[DB_PROPERTIES.IMDB_LINK] = 'https://www.imdb.com/title/' + imdbInfo[0].nextSibling.textContent.trim();
     }
     const release_date = Array.from(dom.window.document.querySelectorAll('#info [property="v:initialReleaseDate"]')).map(s => s.textContent.split('(')[0]).sort()[0]
-    console.log('release_date' + release_date);
     itemData[DB_PROPERTIES.MOVIE_RELEASE_DATE] = dayjs(release_date).format('YYYY-MM-DD');
-    console.log('itemData[DB_PROPERTIES.MOVIE_RELEASE_DATE]' + itemData[DB_PROPERTIES.MOVIE_RELEASE_DATE]);
 
   // music item page
   } else if (category === CATEGORY.music) {
