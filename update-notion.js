@@ -126,7 +126,7 @@ async function fetchItem(link) {
   if (imdbInfo.length) {
     itemData[DB_PROPERTIES.IMDB_LINK] = 'https://www.imdb.com/title/' + imdbInfo[0].nextSibling.textContent.trim();
   }
-  const release_date = dom.window.document.querySelector('#info [property="v:initialReleaseDate"]').textContent.split('(')[0];
+  const release_date = Array.from(dom.window.document.querySelectorAll('#info [property="v:initialReleaseDate"]')).map(s => s.textContent.split('(')[0]).sort()[0]
   itemData[DB_PROPERTIES.MOVIE_RELEASE_DATE] = dayjs(release_date).format('YYYY-MM-DD');
 
   return itemData;
